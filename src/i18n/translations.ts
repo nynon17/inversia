@@ -8,7 +8,7 @@ export const translations = {
       contact: 'Kontakt',
     },
     hero: {
-      subtitle: 'Projektowanie wnętrz z pasją i precyzją',
+      subtitle: 'Spacial De',
       cta_offer: 'Zobacz ofertę',
       cta_contact: 'Kontakt',
     },
@@ -107,7 +107,7 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      subtitle: 'Interior design with passion and precision',
+      subtitle: 'Spacial De',
       cta_offer: 'View services',
       cta_contact: 'Contact',
     },
@@ -206,7 +206,7 @@ export const translations = {
       contact: 'Kontakt',
     },
     hero: {
-      subtitle: 'Innenarchitektur mit Leidenschaft und Präzision',
+      subtitle: 'Spacial De',
       cta_offer: 'Angebot ansehen',
       cta_contact: 'Kontakt',
     },
