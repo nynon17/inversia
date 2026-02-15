@@ -126,6 +126,9 @@ export const translations = {
       info: 'Obsługa klientów w całej Europie. Faktury UE. Języki: PL / EN / DE.',
       social: 'Media społecznościowe',
     },
+    order: {
+      subtitle: 'Wypełnij formularz, a odezwiemy się najszybciej jak to możliwe.',
+    },
   },
   en: {
     nav: {
@@ -254,6 +257,9 @@ export const translations = {
       info: 'Serving clients across Europe. EU invoices. Languages: PL / EN / DE.',
       social: 'Social media',
     },
+    order: {
+      subtitle: 'Fill out the form and we\'ll get back to you as soon as possible.',
+    },
   },
   de: {
     nav: {
@@ -381,6 +387,9 @@ export const translations = {
       title: 'Kontakt',
       info: 'Kundenbetreuung in ganz Europa. EU-Rechnungen. Sprachen: PL / EN / DE.',
       social: 'Soziale Medien',
+    },
+    order: {
+      subtitle: 'Füllen Sie das Formular aus und wir melden uns so schnell wie möglich.',
     },
   },
 } as const;

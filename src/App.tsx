@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Index from "./pages/Index";
 import Offer from "./pages/Offer";
+import Order from "./pages/Order";
 import Portfolio from "./pages/Portfolio";
 import Reviews from "./pages/Reviews";
 import Contact from "./pages/Contact";
@@ -29,6 +30,7 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/offer" element={<Offer />} />
+                  <Route path="/order" element={<Order />} />
                   <Route path="/portfolio" element={<Portfolio />} />
                   <Route path="/reviews" element={<Reviews />} />
                   <Route path="/contact" element={<Contact />} />

@@ -1,10 +1,13 @@
-import { Link } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
 import { translations } from '@/i18n/translations';
 import { Check } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+const packageKeys = ['basic', 'premium', 'consultation', 'custom'] as const;
 
 const Offer = () => {
   const { t, lang } = useLang();
+  const navigate = useNavigate();
 
   const packages = (() => {
     const pkgs = (translations as any)[lang]?.offer?.packages;
@@ -42,16 +45,16 @@ const Offer = () => {
               </ul>
               
               <div className="mt-auto">
-                <Link
-                  to="/contact"
-                  className={`px-6 py-3 text-sm font-sans tracking-wide hover:opacity-90 inline-block w-full text-center ${
+                <button
+                  onClick={() => navigate(`/order?package=${packageKeys[i]}`)}
+                  className={`px-6 py-3 text-sm font-sans tracking-wide hover:opacity-90 inline-block w-full text-center cursor-pointer ${
                     pkg.featured 
                       ? 'bg-primary text-primary-foreground' 
                       : 'border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors'
                   }`}
                 >
                   {t('offer.cta')}
-                </Link>
+                </button>
               </div>
             </div>
           ))}
