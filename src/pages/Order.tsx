@@ -132,10 +132,11 @@ const Order = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!captchaToken) {
-      setCaptchaError(true);
-      return;
-    }
+    // CAPTCHA WYŁĄCZONA NA CZAS TESTÓW
+    // if (!captchaToken) {
+    //   setCaptchaError(true);
+    //   return;
+    // }
     
     setIsSubmitting(true);
 
@@ -144,14 +145,13 @@ const Order = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: 'abce11a8-1345-45bc-baf0-3fd58b1c3a98', // Zmień na swój klucz z web3forms.com
+          access_key: 'abce11a8-1345-45bc-baf0-3fd58b1c3a98',
           subject: source === 'contact' 
             ? `Formularz kontaktowy` 
             : `Nowe zapytanie: ${packageNames[packageType][lang]}`,
           from_name: formData.name,
           package: source === 'contact' ? 'Formularz kontaktowy (bez wyboru pakietu)' : packageNames[packageType][lang],
           source: source === 'contact' ? 'Strona kontakt' : 'Strona oferta',
-          'h-captcha-response': captchaToken,
           ...formData,
         }),
       });
@@ -312,15 +312,7 @@ const Order = () => {
             />
           </div>
 
-          {/* hCaptcha */}
-          <div>
-            <div ref={captchaRef} className="flex justify-center"></div>
-            {captchaError && (
-              <p className="text-destructive text-sm text-center mt-2">
-                {labels.captchaRequired[lang]}
-              </p>
-            )}
-          </div>
+          {/* CAPTCHA WYŁĄCZONA NA CZAS TESTÓW */}
 
           {submitError && (
             <p className="text-destructive text-sm text-center">
