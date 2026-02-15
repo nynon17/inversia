@@ -23,6 +23,7 @@ const Order = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [captchaError, setCaptchaError] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const captchaRef = useRef<HTMLDivElement>(null);
   const captchaWidgetId = useRef<string | null>(null);
 
@@ -101,7 +102,9 @@ const Order = () => {
     submit: { pl: 'Wyślij zapytanie', en: 'Send inquiry', de: 'Anfrage senden' },
     success: { pl: 'Dziękujemy! Wkrótce się odezwiemy.', en: 'Thank you! We\'ll get back to you soon.', de: 'Vielen Dank! Wir melden uns bald.' },
     back: { pl: 'Wróć do oferty', en: 'Back to services', de: 'Zurück zum Angebot' },
+    backContact: { pl: 'Wróć do kontaktu', en: 'Back to contact', de: 'Zurück zum Kontakt' },
     captchaRequired: { pl: 'Proszę potwierdzić, że nie jesteś robotem', en: 'Please confirm you are not a robot', de: 'Bitte bestätigen Sie, dass Sie kein Roboter sind' },
+    submitError: { pl: 'Wystąpił błąd. Spróbuj ponownie lub skontaktuj się bezpośrednio.', en: 'An error occurred. Please try again or contact us directly.', de: 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.' },
   };
 
   const stylePlaceholders: Record<string, string> = {
@@ -153,11 +156,15 @@ const Order = () => {
         }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
         setIsSuccess(true);
+      } else {
+        setSubmitError(true);
       }
     } catch (error) {
       console.error('Error:', error);
+      setSubmitError(true);
     } finally {
       setIsSubmitting(false);
     }
@@ -172,10 +179,10 @@ const Order = () => {
           </div>
           <h1 className="text-2xl font-serif mb-4">{labels.success[lang]}</h1>
           <button
-            onClick={() => navigate('/offer')}
+            onClick={() => navigate(source === 'contact' ? '/contact' : '/offer')}
             className="text-primary hover:underline mt-4"
           >
-            {labels.back[lang]}
+            {source === 'contact' ? labels.backContact[lang] : labels.back[lang]}
           </button>
         </div>
       </main>
@@ -232,7 +239,7 @@ const Order = () => {
           </div>
 
           {/* Metraż - dla basic, premium, custom */}
-          {(packageType === 'basic' || packageType === 'premium' || packageType === 'custom') && (
+          {(packageType === 'basic' || packageType === 'premium' || (packageType === 'custom' && source !== 'contact')) && (
             <div>
               <label className="block text-sm font-medium mb-2">{labels.area[lang]} *</label>
               <input
@@ -309,11 +316,17 @@ const Order = () => {
           <div>
             <div ref={captchaRef} className="flex justify-center"></div>
             {captchaError && (
-              <p className="text-red-500 text-sm text-center mt-2">
+              <p className="text-destructive text-sm text-center mt-2">
                 {labels.captchaRequired[lang]}
               </p>
             )}
           </div>
+
+          {submitError && (
+            <p className="text-destructive text-sm text-center">
+              {labels.submitError[lang]}
+            </p>
+          )}
 
           <button
             type="submit"
