@@ -1,9 +1,17 @@
 import { Phone, Mail, Facebook, Instagram } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
 import Newsletter from '@/components/Newsletter';
+import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const navigate = useNavigate();
+
+  const contactButtonText: Record<string, string> = {
+    pl: 'Chcę się skontaktować',
+    en: 'I want to get in touch',
+    de: 'Ich möchte Kontakt aufnehmen',
+  };
 
   return (
     <main className="py-16">
@@ -29,6 +37,15 @@ const Contact = () => {
         </div>
 
         <p className="text-sm text-muted-foreground text-center mt-10">{t('contact.info')}</p>
+
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => navigate('/order?package=custom&source=contact')}
+            className="bg-primary text-primary-foreground px-8 py-4 text-sm font-sans tracking-wide hover:opacity-90 mb-12"
+          >
+            {contactButtonText[lang]}
+          </button>
+        </div>
 
         <div className="mt-12 text-center">
           <h2 className="text-xl font-serif mb-4">{t('contact.social')}</h2>
