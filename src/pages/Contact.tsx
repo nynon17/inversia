@@ -19,20 +19,13 @@ const Contact = () => {
         <h1 className="text-3xl md:text-4xl font-serif text-center mb-16">{t('contact.title')}</h1>
 
         <div className="space-y-6 text-center">
-          <a
-            href="tel:+48123456789"
-            className="flex items-center justify-center gap-3 text-foreground hover:text-primary"
-          >
-            <Phone size={18} />
-            <span className="text-lg font-sans">+48 123 456 789</span>
-          </a>
 
           <a
-            href="mailto:hello@inversia.design"
+            href="mailto:contact@inversia.eu"
             className="flex items-center justify-center gap-3 text-foreground hover:text-primary"
           >
             <Mail size={18} />
-            <span className="text-lg font-sans">hello@inversia.design</span>
+            <span className="text-lg font-sans">contact@inversia.eu</span>
           </a>
         </div>
 

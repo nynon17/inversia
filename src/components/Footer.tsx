@@ -16,11 +16,8 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <a href="tel:+48123456789" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2">
-              <Phone size={14} /> +48 123 456 789
-            </a>
-            <a href="mailto:hello@inversia.design" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2">
-              <Mail size={14} /> hello@inversia.design
+            <a href="mailto:contact@inversia.eu" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-2">
+              <Mail size={14} /> contact@inversia.eu
             </a>
           </div>
 

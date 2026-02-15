@@ -146,6 +146,7 @@ const Order = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'abce11a8-1345-45bc-baf0-3fd58b1c3a98',
+          botcheck: false,
           subject: source === 'contact' 
             ? `Formularz kontaktowy` 
             : `Nowe zapytanie: ${packageNames[packageType][lang]}`,
