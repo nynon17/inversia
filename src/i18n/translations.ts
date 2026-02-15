@@ -37,7 +37,7 @@ export const translations = {
       ],
     },
     portfolioTeaser: {
-      title: 'Wybrane projekty',
+      title: 'Wykonane projekty',
       cta: 'Zobacz portfolio',
     },
     newsletter: {

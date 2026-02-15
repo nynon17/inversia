@@ -1,22 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
 import Newsletter from '@/components/Newsletter';
-
-import portfolio1 from '@/assets/portfolio-1.jpg';
-import portfolio2 from '@/assets/portfolio-2.jpg';
-import portfolio3 from '@/assets/portfolio-3.jpg';
-import portfolio4 from '@/assets/portfolio-4.jpg';
-import portfolio5 from '@/assets/portfolio-5.jpg';
-import portfolio6 from '@/assets/portfolio-6.jpg';
-
-const teaserProjects = [
-  { image: portfolio1, titleKey: 'Salon minimalistyczny' },
-  { image: portfolio2, titleKey: 'Sypialnia skandynawska' },
-  { image: portfolio3, titleKey: 'Kuchnia loft' },
-  { image: portfolio4, titleKey: 'Gabinet klasyczny' },
-  { image: portfolio5, titleKey: 'Jadalnia japandi' },
-  { image: portfolio6, titleKey: 'Łazienka modern' },
-];
+import { albums } from '@/data/projects';
 
 const Index = () => {
   const { t, lang } = useLang();
@@ -112,19 +97,29 @@ const Index = () => {
       <section className="py-16 border-t border-border">
         <div className="container">
           <h2 className="text-2xl md:text-3xl font-serif mb-10 text-center">{t('portfolioTeaser.title')}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {teaserProjects.map((project, i) => (
-              <div key={i}>
-                <img
-                  src={project.image}
-                  alt={project.titleKey}
-                  className="w-full aspect-[4/3] object-cover"
-                  loading="lazy"
-                />
-                <p className="text-xs text-muted-foreground mt-2 font-sans">{project.titleKey}</p>
-              </div>
-            ))}
-          </div>
+          
+          {albums.filter(a => a.images.length > 0).length === 0 ? (
+            <p className="text-center text-muted-foreground mb-10">
+              {lang === 'pl' ? 'Wkrótce...' : lang === 'de' ? 'Bald...' : 'Coming soon...'}
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {albums.filter(a => a.images.length > 0).map((album) => (
+                <Link key={album.id} to="/portfolio" className="group">
+                  <img
+                    src={album.images[0]}
+                    alt={album.title[lang as keyof typeof album.title] || `Projekt ${album.id}`}
+                    className="w-full aspect-[4/3] object-cover group-hover:opacity-90 transition-opacity"
+                    loading="lazy"
+                  />
+                  <p className="text-sm font-serif mt-3 group-hover:text-primary transition-colors">
+                    {album.title[lang as keyof typeof album.title] || `Projekt ${album.id}`}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          )}
+          
           <div className="text-center mt-10">
             <Link
               to="/portfolio"

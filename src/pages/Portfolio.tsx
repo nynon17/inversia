@@ -1,129 +1,154 @@
 import { useState } from 'react';
 import { useLang } from '@/contexts/LanguageContext';
-import { translations } from '@/i18n/translations';
-import ProjectModal from '@/components/ProjectModal';
-
-import portfolio1 from '@/assets/portfolio-1.jpg';
-import portfolio2 from '@/assets/portfolio-2.jpg';
-import portfolio3 from '@/assets/portfolio-3.jpg';
-import portfolio4 from '@/assets/portfolio-4.jpg';
-import portfolio5 from '@/assets/portfolio-5.jpg';
-import portfolio6 from '@/assets/portfolio-6.jpg';
-
-type Category = 'all' | 'apartment' | 'house' | 'office' | 'commercial' | 'thematic';
-
-interface Project {
-  title: string;
-  description: string;
-  scope: string;
-  image: string;
-  category: Category;
-}
-
-const projectsData: Record<string, Project[]> = {
-  pl: [
-    { title: 'Mieszkanie na Mokotowie', description: 'Jasne, minimalistyczne wnętrze z oliwkowymi akcentami.', scope: 'Koncepcja, wizualizacje, dobór materiałów', image: portfolio1, category: 'apartment' },
-    { title: 'Dom pod Berlinem', description: 'Skandynawska sypialnia z naturalnymi materiałami.', scope: 'Koncepcja, wizualizacje', image: portfolio2, category: 'house' },
-    { title: 'Loft na Pradze', description: 'Kuchnia w stylu industrial z cegłą i metalem.', scope: 'Koncepcja, wizualizacje, dobór materiałów', image: portfolio3, category: 'apartment' },
-    { title: 'Gabinet w Wiedniu', description: 'Elegancki gabinet w stylu modern classic.', scope: 'Koncepcja, wizualizacje', image: portfolio4, category: 'office' },
-    { title: 'Restauracja japońska', description: 'Przestrzeń inspirowana tradycyjnym japandi.', scope: 'Koncepcja, wizualizacje, dobór materiałów', image: portfolio5, category: 'thematic' },
-    { title: 'Łazienka premium', description: 'Minimalistyczna łazienka z marmurowym wykończeniem.', scope: 'Wizualizacje, dobór materiałów', image: portfolio6, category: 'apartment' },
-    { title: 'Mieszkanie w Monachium', description: 'Ciepły minimalizm z drewnianymi detalami.', scope: 'Koncepcja, wizualizacje', image: portfolio2, category: 'apartment' },
-    { title: 'Biuro coworkingowe', description: 'Funkcjonalna przestrzeń do pracy zespołowej.', scope: 'Koncepcja, wizualizacje, dobór materiałów', image: portfolio1, category: 'office' },
-    { title: 'Dom jednorodzinny, Kraków', description: 'Projekt salonu z jadalnią w stylu boho.', scope: 'Koncepcja, wizualizacje', image: portfolio5, category: 'house' },
-    { title: 'Salon kosmetyczny', description: 'Luksusowe wnętrze lokalu usługowego.', scope: 'Koncepcja, wizualizacje, dobór materiałów', image: portfolio6, category: 'commercial' },
-    { title: 'Apartament wakacyjny', description: 'Bright, airy interior near the seaside.', scope: 'Koncepcja, wizualizacje', image: portfolio3, category: 'apartment' },
-    { title: 'Showroom meblowy', description: 'Przestrzeń wystawiennicza z podziałem na strefy.', scope: 'Koncepcja, wizualizacje, dobór materiałów', image: portfolio4, category: 'commercial' },
-  ],
-  en: [
-    { title: 'Apartment in Mokotów', description: 'Bright, minimalist interior with olive accents.', scope: 'Concept, visualizations, material selection', image: portfolio1, category: 'apartment' },
-    { title: 'House near Berlin', description: 'Scandinavian bedroom with natural materials.', scope: 'Concept, visualizations', image: portfolio2, category: 'house' },
-    { title: 'Loft in Praga district', description: 'Industrial-style kitchen with brick and metal.', scope: 'Concept, visualizations, material selection', image: portfolio3, category: 'apartment' },
-    { title: 'Office in Vienna', description: 'Elegant modern classic office space.', scope: 'Concept, visualizations', image: portfolio4, category: 'office' },
-    { title: 'Japanese restaurant', description: 'Space inspired by traditional japandi style.', scope: 'Concept, visualizations, material selection', image: portfolio5, category: 'thematic' },
-    { title: 'Premium bathroom', description: 'Minimalist bathroom with marble finishes.', scope: 'Visualizations, material selection', image: portfolio6, category: 'apartment' },
-    { title: 'Apartment in Munich', description: 'Warm minimalism with wooden details.', scope: 'Concept, visualizations', image: portfolio2, category: 'apartment' },
-    { title: 'Coworking office', description: 'Functional space for team collaboration.', scope: 'Concept, visualizations, material selection', image: portfolio1, category: 'office' },
-    { title: 'Family house, Kraków', description: 'Living room with dining area in boho style.', scope: 'Concept, visualizations', image: portfolio5, category: 'house' },
-    { title: 'Beauty salon', description: 'Luxurious commercial interior.', scope: 'Concept, visualizations, material selection', image: portfolio6, category: 'commercial' },
-    { title: 'Holiday apartment', description: 'Bright, airy interior near the seaside.', scope: 'Concept, visualizations', image: portfolio3, category: 'apartment' },
-    { title: 'Furniture showroom', description: 'Exhibition space with zone divisions.', scope: 'Concept, visualizations, material selection', image: portfolio4, category: 'commercial' },
-  ],
-  de: [
-    { title: 'Wohnung in Mokotów', description: 'Helles, minimalistisches Interieur mit Olivakzenten.', scope: 'Konzept, Visualisierungen, Materialauswahl', image: portfolio1, category: 'apartment' },
-    { title: 'Haus bei Berlin', description: 'Skandinavisches Schlafzimmer mit natürlichen Materialien.', scope: 'Konzept, Visualisierungen', image: portfolio2, category: 'house' },
-    { title: 'Loft im Praga-Viertel', description: 'Küche im Industrial-Stil mit Ziegel und Metall.', scope: 'Konzept, Visualisierungen, Materialauswahl', image: portfolio3, category: 'apartment' },
-    { title: 'Büro in Wien', description: 'Eleganter Modern-Classic Büroraum.', scope: 'Konzept, Visualisierungen', image: portfolio4, category: 'office' },
-    { title: 'Japanisches Restaurant', description: 'Raum inspiriert vom traditionellen Japandi-Stil.', scope: 'Konzept, Visualisierungen, Materialauswahl', image: portfolio5, category: 'thematic' },
-    { title: 'Premium-Badezimmer', description: 'Minimalistisches Bad mit Marmoroberflächen.', scope: 'Visualisierungen, Materialauswahl', image: portfolio6, category: 'apartment' },
-    { title: 'Wohnung in München', description: 'Warmer Minimalismus mit Holzdetails.', scope: 'Konzept, Visualisierungen', image: portfolio2, category: 'apartment' },
-    { title: 'Coworking-Büro', description: 'Funktionaler Raum für Teamarbeit.', scope: 'Konzept, Visualisierungen, Materialauswahl', image: portfolio1, category: 'office' },
-    { title: 'Einfamilienhaus, Kraków', description: 'Wohnzimmer mit Essbereich im Boho-Stil.', scope: 'Konzept, Visualisierungen', image: portfolio5, category: 'house' },
-    { title: 'Kosmetiksalon', description: 'Luxuriöses Gewerbeinterieur.', scope: 'Konzept, Visualisierungen, Materialauswahl', image: portfolio6, category: 'commercial' },
-    { title: 'Ferienwohnung', description: 'Helles, luftiges Interieur am Meer.', scope: 'Konzept, Visualisierungen', image: portfolio3, category: 'apartment' },
-    { title: 'Möbel-Showroom', description: 'Ausstellungsraum mit Zoneneinteilung.', scope: 'Konzept, Visualisierungen, Materialauswahl', image: portfolio4, category: 'commercial' },
-  ],
-};
-
-const filterKeys: Category[] = ['all', 'apartment', 'house', 'office', 'commercial', 'thematic'];
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { albums, Album } from '@/data/projects';
 
 const Portfolio = () => {
   const { t, lang } = useLang();
-  const [filter, setFilter] = useState<Category>('all');
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const projects = projectsData[lang] || projectsData.pl;
-  const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter);
+  const openAlbum = (album: Album) => {
+    if (album.images.length > 0) {
+      setSelectedAlbum(album);
+      setCurrentImageIndex(0);
+    }
+  };
 
-  const filters = (translations as any)[lang]?.portfolio?.filters || {};
+  const closeAlbum = () => {
+    setSelectedAlbum(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedAlbum) {
+      setCurrentImageIndex((prev) => 
+        prev < selectedAlbum.images.length - 1 ? prev + 1 : 0
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedAlbum) {
+      setCurrentImageIndex((prev) => 
+        prev > 0 ? prev - 1 : selectedAlbum.images.length - 1
+      );
+    }
+  };
+
+  // Filtruj albumy które mają zdjęcia
+  const albumsWithImages = albums.filter(album => album.images.length > 0);
+
+  const placeholderText: Record<string, string> = {
+    pl: 'Brak zdjęć - dodaj zdjęcia do src/assets/projects/',
+    en: 'No images - add images to src/assets/projects/',
+    de: 'Keine Bilder - fügen Sie Bilder zu src/assets/projects/ hinzu',
+  };
+
+  const projectLabel: Record<string, string> = {
+    pl: 'Projekt',
+    en: 'Project',
+    de: 'Projekt',
+  };
 
   return (
     <main className="py-16">
       <div className="container">
         <h1 className="text-3xl md:text-4xl font-serif text-center mb-10">{t('portfolio.title')}</h1>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {filterKeys.map((key) => (
-            <button
-              key={key}
-              onClick={() => setFilter(key)}
-              className={`px-4 py-2 text-xs font-sans tracking-wide border ${
-                filter === key
-                  ? 'border-foreground text-foreground'
-                  : 'border-border text-muted-foreground hover:border-foreground hover:text-foreground'
-              }`}
-            >
-              {filters[key] || key}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((project, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedProject(project)}
-              className="text-left group"
-            >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full aspect-[4/3] object-cover"
-                loading="lazy"
-              />
-              <h3 className="text-sm font-sans font-medium mt-3 group-hover:text-primary">{project.title}</h3>
-              <p className="text-xs text-muted-foreground mt-1">{project.description}</p>
-              <p className="text-xs text-muted-foreground mt-1 italic">{project.scope}</p>
-            </button>
-          ))}
-        </div>
+        {albumsWithImages.length === 0 ? (
+          <p className="text-center text-muted-foreground">{placeholderText[lang]}</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {albums.map((album) => (
+              <button
+                key={album.id}
+                onClick={() => openAlbum(album)}
+                disabled={album.images.length === 0}
+                className="text-left group disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {album.images.length > 0 ? (
+                  <img
+                    src={album.images[0]}
+                    alt={album.title[lang as keyof typeof album.title] || `${projectLabel[lang]} ${album.id}`}
+                    className="w-full aspect-[4/3] object-cover group-hover:opacity-90 transition-opacity"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full aspect-[4/3] bg-muted flex items-center justify-center">
+                    <span className="text-muted-foreground text-sm">{projectLabel[lang]} {album.id}</span>
+                  </div>
+                )}
+                <h3 className="text-lg font-serif mt-4 group-hover:text-primary transition-colors">
+                  {album.title[lang as keyof typeof album.title] || `${projectLabel[lang]} ${album.id}`}
+                </h3>
+                {album.images.length > 0 && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {album.images.length} {lang === 'pl' ? 'zdjęć' : lang === 'de' ? 'Fotos' : 'photos'}
+                  </p>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
-      <ProjectModal
-        project={selectedProject}
-        open={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      {/* Lightbox / Gallery Modal */}
+      {selectedAlbum && (
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+          <button
+            onClick={closeAlbum}
+            className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+          >
+            <X size={32} />
+          </button>
+
+          <button
+            onClick={prevImage}
+            className="absolute left-4 text-white hover:text-gray-300 z-10"
+          >
+            <ChevronLeft size={48} />
+          </button>
+
+          <button
+            onClick={nextImage}
+            className="absolute right-4 text-white hover:text-gray-300 z-10"
+          >
+            <ChevronRight size={48} />
+          </button>
+
+          <div className="max-w-5xl max-h-[85vh] px-16">
+            <img
+              src={selectedAlbum.images[currentImageIndex]}
+              alt={`${selectedAlbum.title[lang as keyof typeof selectedAlbum.title]} - ${currentImageIndex + 1}`}
+              className="max-w-full max-h-[80vh] object-contain mx-auto"
+            />
+            <div className="text-center mt-4">
+              <p className="text-white font-serif text-lg">
+                {selectedAlbum.title[lang as keyof typeof selectedAlbum.title] || `${projectLabel[lang]} ${selectedAlbum.id}`}
+              </p>
+              <p className="text-gray-400 text-sm mt-1">
+                {currentImageIndex + 1} / {selectedAlbum.images.length}
+              </p>
+            </div>
+          </div>
+
+          {/* Thumbnails */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 max-w-full overflow-x-auto px-4">
+            {selectedAlbum.images.map((img, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentImageIndex(idx)}
+                className={`flex-shrink-0 w-16 h-12 ${
+                  idx === currentImageIndex ? 'ring-2 ring-white' : 'opacity-50 hover:opacity-100'
+                }`}
+              >
+                <img src={img} alt="" className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </main>
   );
 };
