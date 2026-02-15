@@ -91,6 +91,10 @@ export const translations = {
     reviews: {
       title: 'Opinie klientów',
       cta: 'Chcesz podobny efekt? Napisz do mnie.',
+      positive: 'Pozytywne',
+      negative: 'Negatywne',
+      empty: 'pusto :)',
+      leaveReview: 'Wystaw opinię',
     },
     contact: {
       title: 'Kontakt',
@@ -190,6 +194,10 @@ export const translations = {
     reviews: {
       title: 'Client reviews',
       cta: 'Want a similar result? Get in touch.',
+      positive: 'Positive',
+      negative: 'Negative',
+      empty: 'empty :)',
+      leaveReview: 'Leave a review',
     },
     contact: {
       title: 'Contact',
@@ -289,6 +297,10 @@ export const translations = {
     reviews: {
       title: 'Kundenbewertungen',
       cta: 'Möchten Sie ein ähnliches Ergebnis? Kontaktieren Sie mich.',
+      positive: 'Positiv',
+      negative: 'Negativ',
+      empty: 'leer :)',
+      leaveReview: 'Bewertung abgeben',
     },
     contact: {
       title: 'Kontakt',
