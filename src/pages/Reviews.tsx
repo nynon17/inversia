@@ -27,7 +27,7 @@ const Reviews = () => {
         <div className="max-w-2xl mx-auto flex justify-center">
           <div
             className="fb-page"
-            data-href="https://www.facebook.com/YOUR_PAGE_NAME"
+            data-href="https://www.facebook.com/profile.php?id=61574567780622"
             data-tabs="reviews"
             data-width="500"
             data-height=""
