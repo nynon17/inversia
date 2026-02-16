@@ -187,7 +187,7 @@ export const translations = {
       packages: [
         {
           name: 'Basic Package',
-          price: '70 PLN / m²',
+          price: '70 PLN ≈ / m²',
           featured: false,
           features: [
             'Full interior design',
@@ -200,7 +200,7 @@ export const translations = {
         },
         {
           name: 'Premium Package',
-          price: '130 PLN ≈ 27£ GBP / m²',
+          price: '130 PLN ≈ £27 GBP / m²',
           featured: true,
           features: [
             'Full interior design',
@@ -218,7 +218,7 @@ export const translations = {
         },
         {
           name: 'Consultation',
-          price: '100 PLN / hour',
+          price: '100 PLN ≈ £20 GBP / hour',
           featured: false,
           features: [
             'Online consultation',
@@ -318,7 +318,7 @@ export const translations = {
       packages: [
         {
           name: 'Basispaket',
-          price: '70 PLN / m²',
+          price: '70 PLN ≈ 17€ / m²',
           featured: false,
           features: [
             'Vollständige Innenraumgestaltung',
@@ -349,7 +349,7 @@ export const translations = {
         },
         {
           name: 'Beratung',
-          price: '100 PLN / Stunde',
+          price: '100 PLN ≈ 25€/ Stunde',
           featured: false,
           features: [
             'Online-Beratung',
