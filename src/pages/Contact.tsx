@@ -1,6 +1,5 @@
-import { Phone, Mail, Facebook, Instagram } from 'lucide-react';
+import { Mail, Facebook, Instagram } from 'lucide-react';
 import { useLang } from '@/contexts/LanguageContext';
-import Newsletter from '@/components/Newsletter';
 import { useNavigate } from 'react-router-dom';
 
 const Contact = () => {
@@ -65,10 +64,6 @@ const Contact = () => {
             </a>
           </div>
         </div>
-      </div>
-
-      <div className="mt-16">
-        <Newsletter />
       </div>
     </main>
   );

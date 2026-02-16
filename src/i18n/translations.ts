@@ -200,7 +200,7 @@ export const translations = {
         },
         {
           name: 'Premium Package',
-          price: '130 PLN / m²',
+          price: '130 PLN ≈ 27£ GBP / m²',
           featured: true,
           features: [
             'Full interior design',
@@ -331,7 +331,7 @@ export const translations = {
         },
         {
           name: 'Premium-Paket',
-          price: '130 PLN / m²',
+          price: '130 PLN ≈ 30€/ m²',
           featured: true,
           features: [
             'Vollständige Innenraumgestaltung',

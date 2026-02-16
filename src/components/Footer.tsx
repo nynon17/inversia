@@ -5,7 +5,7 @@ const Footer = () => {
   const { t } = useLang();
 
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="border-t border-border bg-[#f5f0e8]">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>

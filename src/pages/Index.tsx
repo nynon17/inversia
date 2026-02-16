@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useLang } from '@/contexts/LanguageContext';
-import Newsletter from '@/components/Newsletter';
 import { albums } from '@/data/projects';
 
 const Index = () => {
@@ -130,9 +129,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Newsletter */}
-      <Newsletter />
     </main>
   );
 };
