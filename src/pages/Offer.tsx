@@ -1,5 +1,5 @@
 import { useLang } from '@/contexts/LanguageContext';
-import { Check } from 'lucide-react';
+import { Check, Home, Sparkles, Building2, Compass, BedDouble, Key, Info } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCurrencyRates, formatPriceWithConversion } from '@/hooks/useCurrencyRates';
 
@@ -200,6 +200,158 @@ const Offer = () => {
             </div>
           ))}
         </div>
+
+        {/* Rodzaje projektowanych wnętrz */}
+        <section className="mt-20 max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-serif text-center mb-10">
+            {lang === 'pl' ? 'Rodzaje projektowanych wnętrz' : lang === 'de' ? 'Arten von Innenräumen' : 'Types of Interior Design'}
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex gap-4 p-4 border border-border rounded-lg">
+              <Home className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">
+                  {lang === 'pl' ? 'Mieszkalne' : lang === 'de' ? 'Wohnräume' : 'Residential'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {lang === 'pl' 
+                    ? 'Pojedyncze pomieszczenia, całe mieszkania i domy.' 
+                    : lang === 'de' 
+                    ? 'Einzelne Räume, ganze Wohnungen und Häuser.' 
+                    : 'Single rooms, entire apartments and houses.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4 p-4 border border-border rounded-lg">
+              <Sparkles className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">
+                  {lang === 'pl' ? 'Przestrzenie tematyczne' : lang === 'de' ? 'Themenräume' : 'Themed Spaces'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {lang === 'pl' 
+                    ? 'Sexroom, schron, męska jaskinia, kobieca przestrzeń, pokój do medytacji, garderoba, dziecięcy i inne nietypowe wnętrza.'
+                    : lang === 'de' 
+                    ? 'Sexroom, Männerhöhle, Unterschlupf, Frauenraum, Meditationsraum, Ankleidezimmer, Kinderzimmer und andere ungewöhnliche Innenräume.'
+                    : 'Sexroom, man cave, vault, female space, meditation room, dressing room, children\'s room and other unique interiors.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4 p-4 border border-border rounded-lg">
+              <Building2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">
+                  {lang === 'pl' ? 'Wnętrza komercyjne' : lang === 'de' ? 'Gewerberäume' : 'Commercial Interiors'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {lang === 'pl' 
+                    ? 'Lokale gastronomiczne, gabinety kosmetyczne, biura, przestrzenie wspólne i inne przestrzenie użytkowe.' 
+                    : lang === 'de' 
+                    ? 'Gastronomiebetriebe, Kosmetikstudios, Büros, Gemeinschaftsräume und andere Nutzräume.' 
+                    : 'Restaurants, beauty salons, offices, common areas and other commercial spaces.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4 p-4 border border-border rounded-lg">
+              <Compass className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">
+                  {lang === 'pl' ? 'Unikalne przestrzenie' : lang === 'de' ? 'Einzigartige Räume' : 'Unique Spaces'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {lang === 'pl' 
+                    ? 'Balkony, tarasy, kampery, jachty, domki letniskowe i inne nietypowe projekty.' 
+                    : lang === 'de' 
+                    ? 'Balkone, Terrassen, Wohnmobile, Yachten, Ferienhäuser und andere ungewöhnliche Projekte.' 
+                    : 'Balconies, terraces, campers, yachts, summer houses and other unusual projects.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4 p-4 border border-border rounded-lg">
+              <BedDouble className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">
+                  {lang === 'pl' ? 'Miejsca na wynajem i hotelowe' : lang === 'de' ? 'Miet- und Hotelräume' : 'Rental & Hotel Spaces'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {lang === 'pl' 
+                    ? 'Apartamenty na wynajem krótkoterminowy, hotele, pensjonaty, hostele i inne przestrzenie przeznaczone dla gości.' 
+                    : lang === 'de' 
+                    ? 'Kurzzeit-Mietwohnungen, Hotels, Pensionen, Hostels und andere Gästeräume.' 
+                    : 'Short-term rental apartments, hotels, guesthouses, hostels and other guest spaces.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4 p-4 border border-border rounded-lg">
+              <Key className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold mb-1">
+                  {lang === 'pl' ? 'Na sprzedaż lub wynajem' : lang === 'de' ? 'Zum Verkauf oder zur Miete' : 'For Sale or Rent'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {lang === 'pl' 
+                    ? 'Projekty przygotowane pod sprzedaż lub wynajem, dostosowane do oczekiwań przyszłych nabywców lub najemców.' 
+                    : lang === 'de' 
+                    ? 'Projekte für Verkauf oder Vermietung, angepasst an die Erwartungen zukünftiger Käufer oder Mieter.' 
+                    : 'Projects prepared for sale or rent, tailored to the expectations of future buyers or tenants.'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Dodatkowe informacje */}
+        <section className="mt-16 max-w-3xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-serif text-center mb-10">
+            {lang === 'pl' ? 'Dodatkowe informacje' : lang === 'de' ? 'Zusätzliche Informationen' : 'Additional Information'}
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              {
+                pl: 'Umożliwiam wykorzystanie elementów, które klient już posiada. Pomagam dopasować je do nowej aranżacji oraz doradzam, w jaki sposób można je odświeżyć, zmienić lub poddać renowacji.',
+                en: 'I enable the use of elements that the client already owns. I help integrate them into the new design and advise on how they can be refreshed, modified, or renovated.',
+                de: 'Ich ermögliche die Nutzung von Elementen, die der Kunde bereits besitzt. Ich helfe, diese in das neue Konzept zu integrieren und berate, wie sie aufgefrischt, verändert oder renoviert werden können.',
+              },
+              {
+                pl: 'Proponuję kreatywne rozwiązania DIY, które nadają wnętrzu unikalny i indywidualny charakter.',
+                en: 'I suggest creative DIY solutions that give the interior a unique and individual character.',
+                de: 'Ich schlage kreative DIY-Lösungen vor, die dem Innenraum einen einzigartigen und individuellen Charakter verleihen.',
+              },
+              {
+                pl: 'Każdą współpracę rozpoczynam od rozmowy wstępnej, wliczonej w cenę usługi. W przypadku rezygnacji pierwsza godzina konsultacji pozostaje bezpłatna.',
+                en: 'Each collaboration begins with an initial consultation included in the service price. If the client decides not to proceed, the first hour remains free of charge.',
+                de: 'Jede Zusammenarbeit beginnt mit einem im Preis enthaltenen Erstgespräch. Entscheidet sich der Kunde gegen eine Zusammenarbeit, bleibt die erste Stunde kostenlos.',
+              },
+              {
+                pl: 'Każdy projekt dostosowuję do indywidualnego stylu życia klienta, dbając o komfort, funkcjonalność oraz estetykę przestrzeni.',
+                en: 'I tailor each project to the client’s individual lifestyle, ensuring comfort, functionality, and refined aesthetics.',
+                de: 'Ich passe jedes Projekt an den individuellen Lebensstil des Kunden an und achte dabei auf Komfort, Funktionalität und eine hochwertige Ästhetik.',
+              },
+              {
+                pl: 'Czas realizacji uzależniam od stopnia skomplikowania projektu oraz liczby niezbędnych korekt.',
+                en: 'The completion time depends on the complexity of the project and the number of necessary revisions.',
+                de: 'Die Umsetzungszeit hängt von der Komplexität des Projekts und der Anzahl der notwendigen Anpassungen ab.',
+              },
+              {
+                pl: 'Podczas realizacji projektu pozostaję w stałym kontakcie z klientem i jestem dostępna bez ograniczeń.',
+                en: 'During the project, I remain in constant contact with the client and am available without restrictions.',
+                de: 'Während der Projektumsetzung bleibe ich in ständigem Kontakt mit dem Kunden und bin ohne Einschränkungen erreichbar.',
+              },
+            ].map((item, index) => (
+              <div key={index} className="flex gap-3 p-4 bg-muted/30 rounded-lg">
+                <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <p className="text-sm">{item[lang as keyof typeof item] || item.en}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );

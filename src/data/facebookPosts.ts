@@ -24,11 +24,6 @@ export const facebookPostUrls: string[] = [
     'https://www.facebook.com/permalink.php?story_fbid=pfbid0b7d5PD5w5BiAdVqQdysbNdMAnbdZsLNCbmKCfQ3tYrxCQLFwHpgLQiT5H4YXYhVml&id=61574567780622',
     'https://www.facebook.com/permalink.php?story_fbid=pfbid0fWjjce9TkACukCFu787QFjxqmT6KVyrsRaq8JmayMRRySRCrrXEDraqEtwdLaLTNl&id=61574567780622',
     'https://www.facebook.com/permalink.php?story_fbid=pfbid0UwQwnTZA24z6PZTN19pnKNrRadXn3R9LL9sJ96Qw4E7ZWDJc1NGbwjfc3uX4Q9tVl&id=61574567780622',
-    '',
-    '',
-    '',
-    '',
-
 ];
 
 

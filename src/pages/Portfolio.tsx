@@ -83,7 +83,7 @@ const Portfolio = () => {
         )}
 
         {/* Przycisk do pełnego portfolio na Instagramie */}
-        <div className="text-center mt-12">
+        <div className="text-center">
           <a
             href="https://www.instagram.com/inversia.spatialdesign"
             target="_blank"
