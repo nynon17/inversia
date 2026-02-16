@@ -115,7 +115,7 @@ const Order = () => {
 
   const budgetPlaceholders: Record<string, string> = {
     pl: 'np. 20 000 - 50 000 zł',
-    en: 'e.g. 5 000 - 15 000 EUR',
+    en: 'e.g. 5 000 - 15 000 GBP',
     de: 'z.B. 5 000 - 15 000 EUR',
   };
 

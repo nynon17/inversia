@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useLang } from '@/contexts/LanguageContext';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Instagram } from 'lucide-react';
 import { albums, Album } from '@/data/projects';
+import { facebookPostUrls } from '@/data/facebookPosts';
+import FacebookPost from '@/components/FacebookPost';
 
 const Portfolio = () => {
   const { t, lang } = useLang();
@@ -51,46 +53,47 @@ const Portfolio = () => {
     de: 'Projekt',
   };
 
+  const facebookSectionTitle: Record<string, string> = {
+    pl: 'Realizacje z Facebooka',
+    en: 'Projects from Facebook',
+    de: 'Projekte von Facebook',
+  };
+
+  const fullPortfolioButton: Record<string, string> = {
+    pl: 'Pełne portfolio',
+    en: 'Full portfolio',
+    de: 'Vollständiges Portfolio',
+  };
+
   return (
     <main className="py-16">
       <div className="container">
         <h1 className="text-3xl md:text-4xl font-serif text-center mb-10">{t('portfolio.title')}</h1>
 
-        {albumsWithImages.length === 0 ? (
-          <p className="text-center text-muted-foreground">{placeholderText[lang]}</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {albums.map((album) => (
-              <button
-                key={album.id}
-                onClick={() => openAlbum(album)}
-                disabled={album.images.length === 0}
-                className="text-left group disabled:opacity-40 disabled:cursor-not-allowed"
-              >
-                {album.images.length > 0 ? (
-                  <img
-                    src={album.images[0]}
-                    alt={album.title[lang as keyof typeof album.title] || `${projectLabel[lang]} ${album.id}`}
-                    className="w-full aspect-[4/3] object-cover group-hover:opacity-90 transition-opacity"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="w-full aspect-[4/3] bg-muted flex items-center justify-center">
-                    <span className="text-muted-foreground text-sm">{projectLabel[lang]} {album.id}</span>
-                  </div>
-                )}
-                <h3 className="text-lg font-serif mt-4 group-hover:text-primary transition-colors">
-                  {album.title[lang as keyof typeof album.title] || `${projectLabel[lang]} ${album.id}`}
-                </h3>
-                {album.images.length > 0 && (
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {album.images.length} {lang === 'pl' ? 'zdjęć' : lang === 'de' ? 'Fotos' : 'photos'}
-                  </p>
-                )}
-              </button>
-            ))}
-          </div>
+        {/* Sekcja postów z Facebooka */}
+        {facebookPostUrls.length > 0 && (
+          <section className="mb-16">
+            <h2 className="text-2xl font-serif text-center mb-8">{facebookSectionTitle[lang]}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto justify-items-center">
+              {facebookPostUrls.map((url, index) => (
+                <FacebookPost key={index} url={url} width={450} />
+              ))}
+            </div>
+          </section>
         )}
+
+        {/* Przycisk do pełnego portfolio na Instagramie */}
+        <div className="text-center mt-12">
+          <a
+            href="https://www.instagram.com/inversia.spatialdesign"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-medium rounded-full hover:opacity-90 transition-opacity"
+          >
+            <Instagram size={20} />
+            {fullPortfolioButton[lang]}
+          </a>
+        </div>
       </div>
 
       {/* Lightbox / Gallery Modal */}

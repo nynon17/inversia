@@ -24,7 +24,7 @@ export const translations = {
       title: 'Style, w których pracuję',
     },
     stylesList: [
-      'Minimalistyczny', 'Nowoczesny', 'Skandynawski', 'Japandi', 'Loft / Industrial',
+      'Minimalistyczny', 'Dopamine Decor', 'Brutalizm', 'Nowoczesny', 'Skandynawski', 'Japandi', 'Loft / Industrial',
       'Soft loft', 'Klasyczny', 'Modern classic', 'Glamour', 'Boho',
       'Organic / Biophilic', 'Contemporary', 'Eklektyczny', 'Warm minimalism', 'Mid-century modern',
     ],
@@ -155,7 +155,7 @@ export const translations = {
       title: 'Styles I work in',
     },
     stylesList: [
-      'Minimalist', 'Modern', 'Scandinavian', 'Japandi', 'Loft / Industrial',
+      'Minimalist', 'Dopamine Decor', 'Brutalism', 'Modern', 'Scandinavian', 'Japandi', 'Loft / Industrial',
       'Soft loft', 'Classic', 'Modern classic', 'Glamour', 'Boho',
       'Organic / Biophilic', 'Contemporary', 'Eclectic', 'Warm minimalism', 'Mid-century modern',
     ],
