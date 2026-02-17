@@ -132,11 +132,10 @@ const Order = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // CAPTCHA WYŁĄCZONA NA CZAS TESTÓW
-    // if (!captchaToken) {
-    //   setCaptchaError(true);
-    //   return;
-    // }
+    if (!captchaToken) {
+      setCaptchaError(true);
+      return;
+    }
     
     setIsSubmitting(true);
 
@@ -313,7 +312,15 @@ const Order = () => {
             />
           </div>
 
-          {/* CAPTCHA WYŁĄCZONA NA CZAS TESTÓW */}
+          {/* hCaptcha */}
+          <div className="flex flex-col items-center">
+            <div ref={captchaRef}></div>
+            {captchaError && (
+              <p className="text-destructive text-sm mt-2">
+                {labels.captchaRequired[lang]}
+              </p>
+            )}
+          </div>
 
           {submitError && (
             <p className="text-destructive text-sm text-center">
