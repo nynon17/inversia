@@ -62,7 +62,6 @@ const packagesData: Package[] = [
         'Opis projektu + wskazówki do realizacji (prezentacja)',
         'Lista zakupów dopasowana do budżetu',
         'Materiały, kolorystyka, zamienniki, moodboard',
-        'Dokładny opis projektu',
         'Wsparcie i zmiany na każdym etapie',
         'Rabaty do 15% na zakup wyposażenia wnętrz',
       ],
@@ -75,7 +74,6 @@ const packagesData: Package[] = [
         'Project description + implementation guidelines (presentation)',
         'Shopping list tailored to budget',
         'Materials, colors, alternatives, moodboard',
-        'Detailed project description',
         'Support and changes at every stage',
         'Up to 15% discounts on interior furnishings',
       ],
@@ -88,7 +86,6 @@ const packagesData: Package[] = [
         'Projektbeschreibung + Umsetzungshinweise (Präsentation)',
         'Einkaufsliste angepasst an das Budget',
         'Materialien, Farben, Alternativen, Moodboard',
-        'Detaillierte Projektbeschreibung',
         'Unterstützung und Änderungen in jeder Phase',
         'Bis zu 15% Rabatt auf Einrichtungsgegenstände',
       ],
@@ -315,6 +312,11 @@ const Offer = () => {
           <div className="space-y-4">
             {[
               {
+                pl: 'Ceny dotyczą metrażu powyżej 10 m². W przypadku mniejszych pomieszczeń cena ustalana jest indywidualnie.',
+                en: 'Prices apply to spaces larger than 10 m². For smaller rooms, pricing is determined individually.',
+                de: 'Die Preise gelten für Flächen über 10 m². Bei kleineren Räumen wird der Preis individuell festgelegt.',
+              },
+              {
                 pl: 'Umożliwiam wykorzystanie elementów, które klient już posiada. Pomagam dopasować je do nowej aranżacji oraz doradzam, w jaki sposób można je odświeżyć, zmienić lub poddać renowacji.',
                 en: 'I enable the use of elements that the client already owns. I help integrate them into the new design and advise on how they can be refreshed, modified, or renovated.',
                 de: 'Ich ermögliche die Nutzung von Elementen, die der Kunde bereits besitzt. Ich helfe, diese in das neue Konzept zu integrieren und berate, wie sie aufgefrischt, verändert oder renoviert werden können.',
@@ -335,14 +337,14 @@ const Offer = () => {
                 de: 'Ich passe jedes Projekt an den individuellen Lebensstil des Kunden an und achte dabei auf Komfort, Funktionalität und eine hochwertige Ästhetik.',
               },
               {
-                pl: 'Czas realizacji uzależniam od stopnia skomplikowania projektu oraz liczby niezbędnych korekt.',
-                en: 'The completion time depends on the complexity of the project and the number of necessary revisions.',
-                de: 'Die Umsetzungszeit hängt von der Komplexität des Projekts und der Anzahl der notwendigen Anpassungen ab.',
+                pl: 'Czas realizacji uzależniony jest od stopnia skomplikowania projektu oraz liczby niezbędnych korekt. Średnio 7–10 dni na jedno pomieszczenie.',
+                en: 'The completion time depends on the project’s complexity and the number of required revisions. On average, 7–10 days per room.',
+                de: 'Die Umsetzungszeit hängt vom Projektumfang und der Anzahl erforderlicher Korrekturen ab. Durchschnittlich 7–10 Tage pro Raum.',
               },
               {
-                pl: 'Podczas realizacji projektu pozostaję w stałym kontakcie z klientem i jestem dostępna bez ograniczeń.',
-                en: 'During the project, I remain in constant contact with the client and am available without restrictions.',
-                de: 'Während der Projektumsetzung bleibe ich in ständigem Kontakt mit dem Kunden und bin ohne Einschränkungen erreichbar.',
+                pl: 'Podczas realizacji projektu pozostaję w stałym kontakcie z klientem.',
+                en: 'During the project, I remain in constant contact with the client.',
+                de: 'Während der Projektumsetzung bleibe ich in ständigem Kontakt mit dem Kunden.',
               },
             ].map((item, index) => (
               <div key={index} className="flex gap-3 p-4 bg-muted/30 rounded-lg">

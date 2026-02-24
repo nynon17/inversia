@@ -108,29 +108,6 @@ const Index = () => {
       <section className="py-16 border-t border-border">
         <div className="container">
           <h2 className="text-2xl md:text-3xl font-serif mb-10 text-center">{t('portfolioTeaser.title')}</h2>
-          
-          {albums.filter(a => a.images.length > 0).length === 0 ? (
-            <p className="text-center text-muted-foreground mb-10">
-              {lang === 'pl' ? 'Wkrótce...' : lang === 'de' ? 'Bald...' : 'Coming soon...'}
-            </p>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {albums.filter(a => a.images.length > 0).map((album) => (
-                <Link key={album.id} to="/portfolio" className="group">
-                  <img
-                    src={album.images[0]}
-                    alt={album.title[lang as keyof typeof album.title] || `Projekt ${album.id}`}
-                    className="w-full aspect-[4/3] object-cover group-hover:opacity-90 transition-opacity"
-                    loading="lazy"
-                  />
-                  <p className="text-sm font-serif mt-3 group-hover:text-primary transition-colors">
-                    {album.title[lang as keyof typeof album.title] || `Projekt ${album.id}`}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          )}
-          
           <div className="text-center mt-10">
             <Link
               to="/portfolio"
