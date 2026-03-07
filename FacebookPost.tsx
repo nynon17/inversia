@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 interface FacebookPostProps {
   url: string;
   width?: number;
-  onLoad?: () => void;
 }
 
 declare global {
@@ -64,7 +63,7 @@ const loadFacebookSDK = (): Promise<void> => {
   });
 };
 
-const FacebookPost = ({ url, width = 500, onLoad }: FacebookPostProps) => {
+const FacebookPost = ({ url, width = 500 }: FacebookPostProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -79,7 +78,6 @@ const FacebookPost = ({ url, width = 500, onLoad }: FacebookPostProps) => {
               if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 observer.disconnect();
                 setIsLoaded(true);
-                onLoad?.();
               }
             }
           });
@@ -87,7 +85,7 @@ const FacebookPost = ({ url, width = 500, onLoad }: FacebookPostProps) => {
         }
       }
     });
-  }, [url, onLoad]);
+  }, [url]);
 
   return (
     <div ref={containerRef} className="facebook-post-container">

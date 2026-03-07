@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLang } from '@/contexts/LanguageContext';
 import { X, ChevronLeft, ChevronRight, Instagram } from 'lucide-react';
 import { albums, Album } from '@/data/projects';
@@ -10,8 +10,7 @@ const Portfolio = () => {
   const { t, lang } = useLang();
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [loadedPosts, setLoadedPosts] = useState(0);
-  const [totalPosts, setTotalPosts] = useState(facebookPostUrls.length);
+  const [fbLoading, setFbLoading] = useState(true);
 
   const openAlbum = (album: Album) => {
     if (album.images.length > 0) {
@@ -68,7 +67,11 @@ const Portfolio = () => {
     de: 'Vollständiges Portfolio',
   };
 
-  const fbLoading = loadedPosts < totalPosts;
+  useEffect(() => {
+    setTimeout(() => {
+      setFbLoading(false);
+    }, 1500); // 1.5 seconds
+  }, []);
 
   return (
     <main className="py-16">
@@ -93,12 +96,7 @@ const Portfolio = () => {
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto justify-items-center">
               {facebookPostUrls.map((url, index) => (
-                <FacebookPost
-                  key={index}
-                  url={url}
-                  width={450}
-                  onLoad={() => setLoadedPosts(prev => prev + 1)}
-                />
+                <FacebookPost key={index} url={url} width={450} />
               ))}
             </div>
           </section>
