@@ -76,7 +76,7 @@ const Portfolio = () => {
             <h2 className="text-2xl font-serif text-center mb-8">{facebookSectionTitle[lang]}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto justify-items-center">
               {facebookPostUrls.map((url, index) => (
-                <FacebookPost key={index} url={url} width={450} />
+                <FacebookPost key={index} url={url} width={450} onLoad={() => {}} />
               ))}
             </div>
           </section>
