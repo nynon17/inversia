@@ -65,11 +65,25 @@ const loadFacebookSDK = (): Promise<void> => {
 
 const FacebookPost = ({ url, width = 500 }: FacebookPostProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     loadFacebookSDK().then(() => {
       if (containerRef.current && window.FB) {
         window.FB.XFBML.parse(containerRef.current);
+        const iframe = containerRef.current.querySelector('iframe');
+        if (iframe) {
+          const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+              if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                observer.disconnect();
+                setIsLoaded(true);
+                onLoad?.();
+              }
+            }
+          });
+          observer.observe(iframe, { childList: true });
+        }
       }
     });
   }, [url]);
@@ -82,6 +96,7 @@ const FacebookPost = ({ url, width = 500 }: FacebookPostProps) => {
         data-width={width}
         data-show-text="true"
       />
+      {isLoaded && <div className="hidden">Loaded</div>}
     </div>
   );
 };
