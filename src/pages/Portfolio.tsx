@@ -4,11 +4,14 @@ import { X, ChevronLeft, ChevronRight, Instagram } from 'lucide-react';
 import { albums, Album } from '@/data/projects';
 import { facebookPostUrls } from '@/data/facebookPosts';
 import FacebookPost from '@/components/FacebookPost';
+import { InfinitySpin } from 'react-loader-spinner';
 
 const Portfolio = () => {
   const { t, lang } = useLang();
   const [selectedAlbum, setSelectedAlbum] = useState<Album | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loadedPosts, setLoadedPosts] = useState(0);
+  const [totalPosts, setTotalPosts] = useState(facebookPostUrls.length);
 
   const openAlbum = (album: Album) => {
     if (album.images.length > 0) {
@@ -65,6 +68,8 @@ const Portfolio = () => {
     de: 'Vollständiges Portfolio',
   };
 
+  const fbLoading = loadedPosts < totalPosts;
+
   return (
     <main className="py-16">
       <div className="container">
@@ -74,9 +79,26 @@ const Portfolio = () => {
         {facebookPostUrls.length > 0 && (
           <section className="mb-16">
             <h2 className="text-2xl font-serif text-center mb-8">{facebookSectionTitle[lang]}</h2>
+            {fbLoading && (
+              <div className="flex justify-center mb-4">
+                <InfinitySpin
+                  height="40"
+                  width="40"
+                  color="#4fa94d"
+                  ariaLabel="loading"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto justify-items-center">
               {facebookPostUrls.map((url, index) => (
-                <FacebookPost key={index} url={url} width={450} onLoad={() => {}} />
+                <FacebookPost
+                  key={index}
+                  url={url}
+                  width={450}
+                  onLoad={() => setLoadedPosts(prev => prev + 1)}
+                />
               ))}
             </div>
           </section>
