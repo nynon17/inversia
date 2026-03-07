@@ -82,8 +82,8 @@ const Portfolio = () => {
             {fbLoading && (
               <div className="flex justify-center mb-4">
                 <InfinitySpin
-                  height="40"
-                  width="40"
+                  height="60"
+                  width="60"
                   color="#4fa94d"
                   ariaLabel="loading"
                   wrapperStyle={{}}
