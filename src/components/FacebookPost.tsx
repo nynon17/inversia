@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { useCookieConsent } from '@/contexts/CookieConsentContext';
+import { BlockedContentPlaceholder } from '@/components/CookieBanner';
 
 interface FacebookPostProps {
   url: string;
@@ -16,6 +18,7 @@ declare global {
 }
 
 // Ładowanie Facebook SDK (raz dla całej aplikacji)
+// WAŻNE: ta funkcja jest wywoływana TYLKO gdy użytkownik zaakceptował cookies marketingowe
 let sdkLoaded = false;
 const loadFacebookSDK = (): Promise<void> => {
   return new Promise((resolve) => {
@@ -25,7 +28,6 @@ const loadFacebookSDK = (): Promise<void> => {
     }
 
     if (document.getElementById('facebook-jssdk')) {
-      // SDK jest już ładowane, czekaj na załadowanie
       const checkFB = setInterval(() => {
         if (window.FB) {
           clearInterval(checkFB);
@@ -35,14 +37,12 @@ const loadFacebookSDK = (): Promise<void> => {
       return;
     }
 
-    // Dodaj root div dla FB
     if (!document.getElementById('fb-root')) {
       const fbRoot = document.createElement('div');
       fbRoot.id = 'fb-root';
       document.body.prepend(fbRoot);
     }
 
-    // Załaduj SDK
     const script = document.createElement('script');
     script.id = 'facebook-jssdk';
     script.src = 'https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v18.0';
@@ -51,7 +51,6 @@ const loadFacebookSDK = (): Promise<void> => {
     script.crossOrigin = 'anonymous';
     script.onload = () => {
       sdkLoaded = true;
-      // Poczekaj aż FB się zainicjalizuje
       const checkFB = setInterval(() => {
         if (window.FB) {
           clearInterval(checkFB);
@@ -66,8 +65,13 @@ const loadFacebookSDK = (): Promise<void> => {
 const FacebookPost = ({ url, width = 500 }: FacebookPostProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { hasCategory } = useCookieConsent();
+  const marketingAllowed = hasCategory('marketing');
 
   useEffect(() => {
+    // Nie ładuj Facebook SDK bez zgody na cookies marketingowe
+    if (!marketingAllowed) return;
+
     loadFacebookSDK().then(() => {
       if (containerRef.current && window.FB) {
         window.FB.XFBML.parse(containerRef.current);
@@ -78,7 +82,6 @@ const FacebookPost = ({ url, width = 500 }: FacebookPostProps) => {
               if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
                 observer.disconnect();
                 setIsLoaded(true);
-                onLoad?.();
               }
             }
           });
@@ -86,7 +89,12 @@ const FacebookPost = ({ url, width = 500 }: FacebookPostProps) => {
         }
       }
     });
-  }, [url]);
+  }, [url, marketingAllowed]);
+
+  // Brak zgody → placeholder zamiast treści Facebooka
+  if (!marketingAllowed) {
+    return <BlockedContentPlaceholder />;
+  }
 
   return (
     <div ref={containerRef} className="facebook-post-container">
